@@ -21,7 +21,6 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity {
 
     Button btnStart;
-
     TextView txtNoti;
 
     @Override
@@ -38,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         SeekBar seekBar1 = findViewById(R.id.seekBar1);
         SeekBar seekBar2 = findViewById(R.id.seekBar2);
         SeekBar seekBar3 = findViewById(R.id.seekBar3);
+        SeekBar seekBar4 = findViewById(R.id.seekBar4);
+        SeekBar seekBar5 = findViewById(R.id.seekBar5);
+        SeekBar seekBar6 = findViewById(R.id.seekBar6);
         btnStart = findViewById(R.id.btnStart);
         txtNoti = (TextView) findViewById(R.id.noti);
 
@@ -49,21 +51,31 @@ public class MainActivity extends AppCompatActivity {
         seekBar1.setTag("horse 1");
         seekBar2.setTag("horse 2");
         seekBar3.setTag("horse 3");
+        seekBar4.setTag("horse 4");
+        seekBar5.setTag("horse 5");
+        seekBar6.setTag("horse 6");
 
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (queue.size() >= 3) {
+                if (queue.size() >= 6) {
+                    handler.removeCallbacks(this);
                     return;
                 }
 
                 int speed1 = random.nextInt(10) + 1;
                 int speed2 = random.nextInt(10) + 1;
                 int speed3 = random.nextInt(10) + 1;
+                int speed4 = random.nextInt(10) + 1;
+                int speed5 = random.nextInt(10) + 1;
+                int speed6 = random.nextInt(10) + 1;
 
                 updateHorseProgress(seekBar1, speed1);
                 updateHorseProgress(seekBar2, speed2);
                 updateHorseProgress(seekBar3, speed3);
+                updateHorseProgress(seekBar4, speed4);
+                updateHorseProgress(seekBar5, speed5);
+                updateHorseProgress(seekBar6, speed6);
 
                 handler.postDelayed(this, random.nextInt(300) + 200);
             }
@@ -94,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
             seekBar1.setProgress(0);
             seekBar2.setProgress(0);
             seekBar3.setProgress(0);
+            seekBar4.setProgress(0);
+            seekBar5.setProgress(0);
+            seekBar6.setProgress(0);
             txtNoti.setText("");
 
             queue.clear();
