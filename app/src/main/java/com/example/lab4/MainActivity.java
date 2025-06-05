@@ -1,5 +1,6 @@
 package com.example.lab4;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -74,9 +75,11 @@ public class MainActivity extends AppCompatActivity {
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
             if (authService.login(username, password)) {
+                callClickyButSuccess(v);
                 Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                 updateUIBasedOnAuthState();
             } else {
+                callClicky(v);
                 Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
             }
         });
@@ -86,8 +89,10 @@ public class MainActivity extends AppCompatActivity {
             String password = etPassword.getText().toString();
             // For simplicity, new users start with 100 money.
             if (authService.register(username, password, 100.0)) {
+                callClickyButSuccess(v);
                 Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
             } else {
+                callClicky(v);
                 Toast.makeText(MainActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
             }
         });
@@ -98,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnLogoutRacing.setOnClickListener(v -> {
+            logout(v);
             authService.logout();
             Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
             updateUIBasedOnAuthState();
@@ -149,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         btnStart.setOnClickListener(v -> {
+            startRace(v);
             for (Horse horse : horses) {
                 horse.getSeekBar().setProgress(0);
             }
@@ -158,6 +165,26 @@ public class MainActivity extends AppCompatActivity {
 
             handler.post(runnable);
         });
+    }
+
+    public void callClicky(View view) {
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.main_activity_sound_button);
+        mediaPlayer.start();
+    }
+
+    public void callClickyButSuccess(View view) {
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.sucessfully);
+        mediaPlayer.start();
+    }
+
+    public void logout(View view) {
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.logout);
+        mediaPlayer.start();
+    }
+
+    public void startRace(View view) {
+        final MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.some_horse_shii);
+        mediaPlayer.start();
     }
 
     private void updateUIBasedOnAuthState() {
