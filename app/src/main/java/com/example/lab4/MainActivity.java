@@ -2,9 +2,13 @@ package com.example.lab4;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,7 +35,13 @@ public class MainActivity extends AppCompatActivity {
 
     List<Horse> horses;
     Queue<Horse> queue;
-    Set<Horse> finishedSet;
+    Set<Horse> finishedSet; // Auth UI Elements
+    EditText etUsername, etPassword;
+    Button btnLogin, btnRegister, btnLogout, btnLogoutRacing;
+    TextView tvCurrentUserStatus;
+    LinearLayout authLayout, raceTrackLayout; // Added raceTrackLayout for visibility control
+
+    AuthService authService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +55,53 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnStart = findViewById(R.id.btnStart);
-        txtNoti = findViewById(R.id.noti);
+        txtNoti = findViewById(R.id.noti); // Auth UI Initialization
+        etUsername = findViewById(R.id.etUsername);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnLogoutRacing = findViewById(R.id.btnLogoutRacing);
+        tvCurrentUserStatus = findViewById(R.id.tvCurrentUserStatus);
+        authLayout = findViewById(R.id.authLayout);
+        raceTrackLayout = findViewById(R.id.raceTrackLayout); // Initialize raceTrackLayout
+
+        authService = new AuthService();
+
+        updateUIBasedOnAuthState();
+
+        btnLogin.setOnClickListener(v -> {
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            if (authService.login(username, password)) {
+                Toast.makeText(MainActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                updateUIBasedOnAuthState();
+            } else {
+                Toast.makeText(MainActivity.this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        btnRegister.setOnClickListener(v -> {
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            // For simplicity, new users start with 100 money.
+            if (authService.register(username, password, 100.0)) {
+                Toast.makeText(MainActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnLogout.setOnClickListener(v -> {
+            authService.logout();
+            Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+            updateUIBasedOnAuthState();
+        });
+
+        btnLogoutRacing.setOnClickListener(v -> {
+            authService.logout();
+            Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+            updateUIBasedOnAuthState();
+        });
 
         horses = new ArrayList<>();
         horses.add(new Horse("Horse 1", findViewById(R.id.seekBar1)));
@@ -69,7 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 for (Horse horse : horses) {
-                    if (finishedSet.contains(horse)) continue;
+                    if (finishedSet.contains(horse))
+                        continue;
 
                     int speed = random.nextInt(10) + 1;
                     horse.move(speed);
@@ -101,5 +158,29 @@ public class MainActivity extends AppCompatActivity {
 
             handler.post(runnable);
         });
+    }
+
+    private void updateUIBasedOnAuthState() {
+        if (authService.isUserLoggedIn()) {
+            User currentUser = authService.getCurrentUser();
+            tvCurrentUserStatus.setText("Logged in as: " + currentUser.getUsername() + " (Money: $"
+                    + String.format("%.2f", currentUser.getMoney()) + ")");
+            authLayout.setVisibility(View.GONE); // Hide login/register form
+            btnLogout.setVisibility(View.VISIBLE);
+            btnLogoutRacing.setVisibility(View.VISIBLE);
+            raceTrackLayout.setVisibility(View.VISIBLE);
+            btnStart.setVisibility(View.VISIBLE);
+            txtNoti.setVisibility(View.VISIBLE);
+        } else {
+            tvCurrentUserStatus.setText("Not logged in");
+            authLayout.setVisibility(View.VISIBLE); // Show login/register form
+            etUsername.setText("");
+            etPassword.setText("");
+            btnLogout.setVisibility(View.GONE);
+            btnLogoutRacing.setVisibility(View.GONE);
+            raceTrackLayout.setVisibility(View.GONE);
+            btnStart.setVisibility(View.GONE);
+            txtNoti.setVisibility(View.GONE);
+        }
     }
 }
