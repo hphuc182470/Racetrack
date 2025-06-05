@@ -12,16 +12,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
+
+// Imports giữ nguyên
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnStart;
     TextView txtNoti;
+    Handler handler;
+    Random random;
+
+    List<Horse> horses;
+    Queue<Horse> queue;
+    Set<Horse> finishedSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,83 +44,58 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        SeekBar seekBar1 = findViewById(R.id.seekBar1);
-        SeekBar seekBar2 = findViewById(R.id.seekBar2);
-        SeekBar seekBar3 = findViewById(R.id.seekBar3);
-        SeekBar seekBar4 = findViewById(R.id.seekBar4);
-        SeekBar seekBar5 = findViewById(R.id.seekBar5);
-        SeekBar seekBar6 = findViewById(R.id.seekBar6);
         btnStart = findViewById(R.id.btnStart);
-        txtNoti = (TextView) findViewById(R.id.noti);
+        txtNoti = findViewById(R.id.noti);
 
-        Random random = new Random();
+        horses = new ArrayList<>();
+        horses.add(new Horse("Horse 1", findViewById(R.id.seekBar1)));
+        horses.add(new Horse("Horse 2", findViewById(R.id.seekBar2)));
+        horses.add(new Horse("Horse 3", findViewById(R.id.seekBar3)));
+        horses.add(new Horse("Horse 4", findViewById(R.id.seekBar4)));
+        horses.add(new Horse("Horse 5", findViewById(R.id.seekBar5)));
+        horses.add(new Horse("Horse 6", findViewById(R.id.seekBar6)));
 
-        Handler handler = new Handler();
-        Queue<SeekBar> queue = new LinkedList<>();
-        Set<SeekBar> finishedSet = new HashSet<>();
-        seekBar1.setTag("horse 1");
-        seekBar2.setTag("horse 2");
-        seekBar3.setTag("horse 3");
-        seekBar4.setTag("horse 4");
-        seekBar5.setTag("horse 5");
-        seekBar6.setTag("horse 6");
+        handler = new Handler();
+        random = new Random();
+        queue = new LinkedList<>();
+        finishedSet = new HashSet<>();
 
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (queue.size() >= 6) {
+                if (queue.size() >= horses.size()) {
                     handler.removeCallbacks(this);
                     return;
                 }
 
-                int speed1 = random.nextInt(10) + 1;
-                int speed2 = random.nextInt(10) + 1;
-                int speed3 = random.nextInt(10) + 1;
-                int speed4 = random.nextInt(10) + 1;
-                int speed5 = random.nextInt(10) + 1;
-                int speed6 = random.nextInt(10) + 1;
+                for (Horse horse : horses) {
+                    if (finishedSet.contains(horse)) continue;
 
-                updateHorseProgress(seekBar1, speed1);
-                updateHorseProgress(seekBar2, speed2);
-                updateHorseProgress(seekBar3, speed3);
-                updateHorseProgress(seekBar4, speed4);
-                updateHorseProgress(seekBar5, speed5);
-                updateHorseProgress(seekBar6, speed6);
+                    int speed = random.nextInt(10) + 1;
+                    horse.move(speed);
+
+                    if (horse.isFinished()) {
+                        finishedSet.add(horse);
+                        queue.add(horse);
+
+                        StringBuilder sb = new StringBuilder("Final result:\n");
+                        int i = 1;
+                        for (Horse h : queue) {
+                            sb.append(i++).append(". ").append(h.getName()).append("\n");
+                        }
+                        txtNoti.setText(sb.toString());
+                    }
+                }
 
                 handler.postDelayed(this, random.nextInt(300) + 200);
-            }
-
-            private void updateHorseProgress(SeekBar seekBar, int speed) {
-                if (queue.contains(seekBar)) return;
-
-                int current = seekBar.getProgress();
-                int max = seekBar.getMax();
-                int next = Math.min(current + speed, max);
-                seekBar.setProgress(next);
-
-                if (next >= max && !finishedSet.contains(seekBar)) {
-                    finishedSet.add(seekBar);
-                    queue.add(seekBar);
-
-                    StringBuilder sb = new StringBuilder("Final result:\n");
-                    int i = 1;
-                    for (SeekBar s : queue) {
-                        sb.append(i++).append(". ").append(s.getTag()).append("\n");
-                    }
-                    txtNoti.setText(sb.toString());
-                }
             }
         };
 
         btnStart.setOnClickListener(v -> {
-            seekBar1.setProgress(0);
-            seekBar2.setProgress(0);
-            seekBar3.setProgress(0);
-            seekBar4.setProgress(0);
-            seekBar5.setProgress(0);
-            seekBar6.setProgress(0);
+            for (Horse horse : horses) {
+                horse.getSeekBar().setProgress(0);
+            }
             txtNoti.setText("");
-
             queue.clear();
             finishedSet.clear();
 
