@@ -2,4 +2,15 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Gambling Theme Colors -->
+    <color name="casino_background">#ebebeb</color>
+    <color name="casino_surface">#1A1A2E</color>
+    <color name="casino_card">#16213E</color>
+    <color name="casino_accent">#C9A961</color>
+    <color name="casino_gold">#D4AF37</color>
+    <color name="casino_text_primary">#E8E8E8</color>
+    <color name="casino_text_secondary">#B0B0B0</color>
+    <color name="casino_red">#8B0000</color>
+    <color name="casino_green">#006400</color>
 </resources>
