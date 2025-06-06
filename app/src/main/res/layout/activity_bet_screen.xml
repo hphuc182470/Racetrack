@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:background="#f5f5f5">
+
+        <!-- Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HORSE RACING - MULTI BET"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Horses List -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SELECT HORSES and BET AMOUNTS:"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Horse 1 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <CheckBox
+                android:id="@+id/horse1_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Star Quest (Odds: 2.5)"
+                android:layout_weight="2"/>
+
+            <EditText
+                android:id="@+id/horse1_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="$"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
+
+        <!-- Horse 2 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <CheckBox
+                android:id="@+id/horse2_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lightning Bolt (Odds: 3.0)"
+                android:layout_weight="2"/>
+
+            <EditText
+                android:id="@+id/horse2_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="$"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
+
+        <!-- Horse 3 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <CheckBox
+                android:id="@+id/horse3_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Midnight Runner (Odds: 4.5)"
+                android:layout_weight="2"/>
+
+            <EditText
+                android:id="@+id/horse3_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="$"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
+
+        <!-- Horse 4 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <CheckBox
+                android:id="@+id/horse4_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Golden Hooves (Odds: 5.0)"
+                android:layout_weight="2"/>
+
+            <EditText
+                android:id="@+id/horse4_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="numberDecimal"
+                android:hint="$"
+                android:background="@android:drawable/editbox_background"/>
+        </LinearLayout>
+
+        <!-- Total Bet -->
+        <TextView
+            android:id="@+id/totalBetText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total bet: $0"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Action Buttons -->
+        <Button
+            android:id="@+id/placeBetButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PLACE BETS"
+            android:background="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/simulateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RUN RACE"
+            android:background="#2196F3"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+
+        <!-- Results Section -->
+        <TextView
+            android:id="@+id/resultTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏆 RACE RESULTS"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/winnerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/payoutText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+</ScrollView>
