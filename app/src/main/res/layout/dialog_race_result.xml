@@ -19,7 +19,7 @@
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🎉 Kết quả cuộc đua 🎉"
+            android:text="🎉 RESULT 🎉"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
@@ -54,7 +54,14 @@
                     android:src="@drawable/cam"
                     android:scaleType="centerCrop"
                     android:background="@drawable/img_border" />
-
+                <TextView
+                    android:id="@+id/txtSecondName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -86,6 +93,14 @@
                     android:src="@drawable/banana"
                     android:scaleType="centerCrop"
                     android:background="@drawable/img_border" />
+                <TextView
+                    android:id="@+id/txtFirstName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
 
                 <ImageView
                     android:layout_width="80dp"
@@ -119,6 +134,14 @@
                     android:src="@drawable/dau"
                     android:scaleType="centerCrop"
                     android:background="@drawable/img_border" />
+                <TextView
+                    android:id="@+id/txtThirdName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -142,7 +165,7 @@
             android:id="@+id/txtReward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="💰 Bạn được thưởng: 100 coins"
+            android:text="💰 You have earned: 100 coins"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#FFD700"

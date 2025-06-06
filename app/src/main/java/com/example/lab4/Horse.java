@@ -49,4 +49,17 @@ public class Horse {
     public void setMoneyBet(int moneyBet) {
         this.moneyBet = moneyBet;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Horse horse = (Horse) o;
+        return name.equals(horse.name); // Horses are equal if their names are the same
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
