@@ -47,7 +47,7 @@
                 android:padding="12dp"
                 android:textColor="@color/casino_text_primary"
                 android:textColorHint="@color/casino_text_secondary"
-                tools:ignore="HardcodedText" />
+                tools:ignore="Autofill,HardcodedText" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -60,7 +60,7 @@
                 android:padding="12dp"
                 android:textColor="@color/casino_text_primary"
                 android:textColorHint="@color/casino_text_secondary"
-                tools:ignore="HardcodedText" />
+                tools:ignore="Autofill,HardcodedText" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -391,6 +391,19 @@
             android:textColor="#FFFFFF"
             android:textSize="18sp"
             android:visibility="gone"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/btnTutorial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/casino_button_bg"
+            app:backgroundTint="@color/casino_accent"
+            android:text="📖 View Tutorial"
+            android:textColor="@color/casino_text_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
             tools:ignore="HardcodedText" />
 
         <TextView

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     // Auth UI Elements
     EditText etUsername, etPassword;
     Button btnLogin, btnRegister, btnLogout, btnLogoutRacing;
-    Button btnPlaceBets, btnAddMoney, btnReset;
+    Button btnPlaceBets, btnAddMoney, btnReset, btnTutorial;
     TextView tvCurrentUserStatus;
     LinearLayout authLayout, raceTrackLayout;
 
@@ -90,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnRegister = findViewById(R.id.btnRegister);
         btnLogout = findViewById(R.id.btnLogout);
+        btnTutorial = findViewById(R.id.btnTutorial);
         btnLogoutRacing = findViewById(R.id.btnLogoutRacing);
         tvCurrentUserStatus = findViewById(R.id.tvCurrentUserStatus);
         authLayout = findViewById(R.id.authLayout);
@@ -272,6 +272,14 @@ public class MainActivity extends AppCompatActivity {
             btnLogoutRacing.setVisibility(View.GONE);
 
             handler.post(runnable);
+        });
+
+        btnTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Intent tutorialIntent = new Intent(MainActivity.this, TutorialActivity.class);
+                 startActivity(tutorialIntent);
+            }
         });
     }
 
@@ -544,4 +552,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }
