@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F0F4F7"> <!-- Different background for variety -->
+
+    <!-- Header (from base or defined here) -->
+    <TextView
+        android:id="@+id/textViewTutorialHeader"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Welcome to Turbo Bet Racing!"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Content Area -->
+    <ImageView
+        android:id="@+id/imageViewWelcome"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/img_welcome_car"
+        android:scaleType="centerInside"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTutorialHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWelcomeSubtext1"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/textViewWelcomeSubtext1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Get ready for high-octane racing action!"
+        android:textSize="18sp"
+        android:textColor="#555555"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewWelcome"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewWelcomeSubtext2"
+        android:layout_marginTop="24dp"/>
+
+    <TextView
+        android:id="@+id/textViewWelcomeSubtext2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Predict the winner and rake in the rewards!"
+        android:textSize="18sp"
+        android:textColor="#555555"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWelcomeSubtext1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutNavigation"
+        android:layout_marginTop="8dp"/>
+
+
+    <!-- Navigation (from base or defined here) -->
+    <LinearLayout
+        android:id="@+id/linearLayoutNavigation"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="24dp">
+
+        <Button
+            android:id="@+id/buttonTutorialBack"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" "
+            android:textColor="?attr/colorPrimary"
+            android:visibility="invisible" /> <!-- Invisible on first screen -->
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:id="@+id/layoutPageIndicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageView android:layout_width="10dp" android:layout_height="10dp" android:src="@drawable/ic_dot_active" android:layout_marginEnd="4dp"/>
+            <ImageView android:layout_width="8dp" android:layout_height="8dp" android:src="@drawable/ic_dot_inactive" android:layout_marginEnd="4dp"/>
+            <ImageView android:layout_width="8dp" android:layout_height="8dp" android:src="@drawable/ic_dot_inactive" android:layout_marginEnd="4dp"/>
+            <ImageView android:layout_width="8dp" android:layout_height="8dp" android:src="@drawable/ic_dot_inactive" android:layout_marginEnd="4dp"/>
+            <ImageView android:layout_width="8dp" android:layout_height="8dp" android:src="@drawable/ic_dot_inactive" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/buttonTutorialNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/buttonSkipTutorial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Skip"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="?attr/colorPrimary"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
